@@ -1,0 +1,4 @@
+name: InvAnal
+version: '${project.version}'
+main: pkg.tap.invanal.InvAnal
+api-version: 1.18
