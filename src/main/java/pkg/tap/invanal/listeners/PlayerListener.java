@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import pkg.tap.invanal.InvAnal;
@@ -43,8 +44,8 @@ public class PlayerListener implements Listener {
 
         for(int i = 0; i < e.getDrops().size(); i++){// looks through every dropped item
             ItemStack drop = e.getDrops().get(i);
-
             for(int j = 0; j < utils.length; j++){//nested for loops :weary:
+
                 if(drop.getType().toString().equals(utils[j])){//if the item is found in the above array
                     keep.add(drop);//remember to keep it
                 }
@@ -62,4 +63,14 @@ public class PlayerListener implements Listener {
         }
         return;
     }
+    
+    @EventHandler
+    public void OnPlayerQuit (PlayerQuitEvent e){
+        //kills participating player on clog
+        Player p = e.getPlayer();
+        if(p.getGameMode() == GameMode.SURVIVAL) {
+            p.damage(10000);
+        }
+    }
+    
 }
